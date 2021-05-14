@@ -17,7 +17,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (other == null)
             {
-                throw new System.ArgumentNullException(nameof(other), "BaseCapability cannot be null");
+                throw new System.ArgumentNullException((other).ToString(), "BaseCapability cannot be null");
             }
         }
 

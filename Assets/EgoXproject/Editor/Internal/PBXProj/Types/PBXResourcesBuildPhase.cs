@@ -20,7 +20,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(uid))
             {
-                throw new System.ArgumentNullException(nameof (uid), "uid cannot be null or empty");
+                throw new System.ArgumentNullException( (uid).ToString(), "uid cannot be null or empty");
             }
 
             PBXProjDictionary emptyDic = new PBXProjDictionary();

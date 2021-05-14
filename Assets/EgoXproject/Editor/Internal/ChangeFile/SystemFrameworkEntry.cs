@@ -15,7 +15,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentNullException(nameof (name), "Name cannot be null or empty");
+                throw new System.ArgumentNullException( (name).ToString(), "Name cannot be null or empty");
             }
 
             FileName = name;
@@ -45,7 +45,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (other == null)
             {
-                throw new System.ArgumentNullException(nameof (other), "SystemFrameworkEntry cannot be null");
+                throw new System.ArgumentNullException( (other).ToString(), "SystemFrameworkEntry cannot be null");
             }
 
             FileName = other.FileName;

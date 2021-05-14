@@ -583,6 +583,10 @@ namespace Egomotion.EgoXproject.Internal
                     case SystemCapability.GameControllers:
                         ApplyGameControllersCapability (capability as GameControllersCapability);
                         break;
+                    
+                    case SystemCapability.UserManagement:
+                        ApplyUserManagementCapability (capability as UserManagementCapability);
+                        break;
 
                     default:
                         throw new System.ArgumentOutOfRangeException();
@@ -1134,6 +1138,35 @@ namespace Egomotion.EgoXproject.Internal
                 ApplyInfoPlistChanges (controllerChanges, true);
             }
         }
+        
+        void ApplyUserManagementCapability (UserManagementCapability capability)
+        {
+            //update pbxproject
+            _pbxproj.EnableSystemCapability ("com.apple.developer.user-management", true);
+            _pbxproj.AddSystemFramework ("TVServices.framework", LinkType.Required);
+            //update info.plist
+            
+            //update entitlements file
+            var entitlementChanges = new PListDictionary();
+            var userManagementTypes = new PListArray();
+            
+            if (capability.UserManagement != null && capability.UserManagement.Length > 0)
+            {
+                foreach (var c in capability.UserManagement)
+                {
+                    if(c == UserManagementCapability.UserManagementType.RunsAsCurrentUser) userManagementTypes.Add("runs-as-current-user");
+                    else if(c == UserManagementCapability.UserManagementType.GetCurrentUser) userManagementTypes.Add("get-current-user");
+                }
+            }
+            
+
+            //always add, even if empty
+            entitlementChanges.Add("com.apple.developer.user-management", userManagementTypes);
+            
+            ApplyEntitlementsChanges(entitlementChanges, true);
+
+          
+        }
 
         #endregion
 
@@ -1151,7 +1184,7 @@ namespace Egomotion.EgoXproject.Internal
 
             foreach (var path in _pbxproj.EntitlementsFilePaths)
             {
-                success &= ModifyEntitlementsFile(path, changes, keepEmpty);
+                success &= ModifyEntitlementsFile(path.Replace("\"",""), changes, keepEmpty);
             }
 
             return success;

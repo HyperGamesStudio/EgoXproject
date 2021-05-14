@@ -62,7 +62,7 @@ namespace Egomotion.EgoXproject.UI
         {
             if (parent == null)
             {
-                throw new System.ArgumentNullException(nameof(parent), "Parent cannot be null");
+                throw new System.ArgumentNullException((parent).ToString(), "Parent cannot be null");
             }
 
             Parent = parent;

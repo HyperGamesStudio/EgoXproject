@@ -34,7 +34,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(path))
             {
-                throw new System.ArgumentNullException(nameof (path), "Path cannot be null");
+                throw new System.ArgumentNullException( (path).ToString(), "Path cannot be null");
             }
 
             Path = path;
@@ -46,7 +46,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (dic == null)
             {
-                throw new System.ArgumentNullException(nameof (dic), "Dictionary cannot be null");
+                throw new System.ArgumentNullException( (dic).ToString(), "Dictionary cannot be null");
             }
 
             Path = dic.StringValue(PATH_KEY);
@@ -65,7 +65,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (other == null)
             {
-                throw new System.ArgumentNullException(nameof (other), "BaseFileEntry cannot be null");
+                throw new System.ArgumentNullException( (other).ToString(), "BaseFileEntry cannot be null");
             }
 
             Path = other.Path;

@@ -32,7 +32,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (fileRef == null)
             {
-                throw new System.ArgumentNullException(nameof(fileRef), "fileRef cannot be null");
+                throw new System.ArgumentNullException((fileRef).ToString(), "fileRef cannot be null");
             }
 
             return CreateCommon(uid, fileRef.UID);
@@ -42,12 +42,12 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(uid))
             {
-                throw new System.ArgumentNullException(nameof (uid), "uid cannot be null or empty");
+                throw new System.ArgumentNullException( (uid).ToString(), "uid cannot be null or empty");
             }
 
             if (string.IsNullOrEmpty(refUID))
             {
-                throw new System.ArgumentNullException(nameof (refUID), "refUID cannot be null");
+                throw new System.ArgumentNullException( (refUID).ToString(), "refUID cannot be null");
             }
 
             PBXProjDictionary emptyDic = new PBXProjDictionary();

@@ -60,7 +60,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (!relativePath.StartsWith(RootPath, System.StringComparison.InvariantCultureIgnoreCase))
             {
-                throw new System.ArgumentException("relativePath must start with the root path", nameof (relativePath));
+                throw new System.ArgumentException("relativePath must start with the root path",  (relativePath).ToString());
             }
 
             var p = relativePath.Remove(0, RootPath.Length);

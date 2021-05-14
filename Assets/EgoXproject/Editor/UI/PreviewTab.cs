@@ -668,6 +668,10 @@ namespace Egomotion.EgoXproject.UI
             case SystemCapability.WirelessAccessoryConfiguration:
                 DrawWirelessAccessoryConfigurationCapability(capability as WirelessAccessoryConfigurationCapability);
                 break;
+            
+            case SystemCapability.UserManagement:
+                DrawUserManagementCapability (capability as UserManagementCapability);
+                break;
 
             default:
                 throw new System.ArgumentOutOfRangeException();
@@ -881,6 +885,28 @@ namespace Egomotion.EgoXproject.UI
             GUILayout.Space (10);
         }
 
+        void DrawUserManagementCapability (UserManagementCapability capability)
+        {
+            EditorGUILayout.BeginHorizontal ();
+            EditorGUILayout.BeginVertical (GUILayout.Width (CAPABILITY_FIRST_COLUMN_WIDTH), GUILayout.ExpandWidth (false));
+            EditorGUILayout.LabelField ("Game Controllers:", GUILayout.Width (CAPABILITY_FIRST_COLUMN_WIDTH), GUILayout.ExpandWidth (false));
+            EditorGUILayout.EndVertical ();
+            EditorGUILayout.BeginVertical ();
+
+            if (capability.UserManagement != null && capability.UserManagement.Length > 0)
+            {
+                foreach (var c in capability.UserManagement)
+                {
+                    EditorGUILayout.LabelField (c.ToString ());
+                }
+            }
+
+            GUILayout.Space (5);
+            EditorGUILayout.EndVertical ();
+            EditorGUILayout.EndHorizontal ();
+            GUILayout.Space (10);
+        }
+
         //Personal VPN
         void DrawPersonalVPNCapability(PersonalVPNCapability capability)
         {
@@ -909,6 +935,8 @@ namespace Egomotion.EgoXproject.UI
             EditorGUILayout.EndHorizontal ();
             GUILayout.Space (10);
         }
+        
+        
 
         void DrawHotspotConfigurationCapability (HotspotConfigurationCapability capability)
         {

@@ -57,7 +57,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (dic == null)
             {
-                throw new System.ArgumentNullException(nameof (dic), "Dictionary cannot be null");
+                throw new System.ArgumentNullException( (dic).ToString(), "Dictionary cannot be null");
             }
 
             Name = dic.StringValue(NAME_KEY);

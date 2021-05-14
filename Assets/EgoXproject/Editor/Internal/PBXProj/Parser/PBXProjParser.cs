@@ -21,7 +21,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (source == null)
             {
-                throw new ArgumentNullException(nameof (source), "Must provide a valid TextReader source");
+                throw new ArgumentNullException( (source).ToString(), "Must provide a valid TextReader source");
             }
 
             _currentToken = null;

@@ -32,6 +32,7 @@ namespace Egomotion.EgoXproject.Internal
         HomeKit,
         HealthKit,
         WirelessAccessoryConfiguration,
+        UserManagement
     }
 
     internal static class SystemCapabilityHelper
@@ -71,7 +72,8 @@ namespace Egomotion.EgoXproject.Internal
                     SystemCapability.DataProtection,
                     SystemCapability.HomeKit,
                     SystemCapability.HealthKit,
-                    SystemCapability.WirelessAccessoryConfiguration
+                    SystemCapability.WirelessAccessoryConfiguration,
+                    SystemCapability.GameControllers
                 };
             }
         }
@@ -93,7 +95,8 @@ namespace Egomotion.EgoXproject.Internal
                     SystemCapability.AssociatedDomains,
                     SystemCapability.AppGroups,
                     SystemCapability.DataProtection,
-                    SystemCapability.HomeKit
+                    SystemCapability.HomeKit,
+                    SystemCapability.UserManagement,
                 };
             }
         }
@@ -170,6 +173,9 @@ namespace Egomotion.EgoXproject.Internal
 
             case SystemCapability.WirelessAccessoryConfiguration:
                 return "Wireless Accessory Configuration";
+            
+            case SystemCapability.UserManagement:
+                return "User Management";
 
             default:
                 throw new System.ArgumentOutOfRangeException();
@@ -249,6 +255,9 @@ namespace Egomotion.EgoXproject.Internal
             case SystemCapability.WirelessAccessoryConfiguration:
                 return new WirelessAccessoryConfigurationCapability(dic);
 
+            case SystemCapability.UserManagement:
+                return new UserManagementCapability(dic);
+
             default:
                 throw new System.ArgumentOutOfRangeException();
             }
@@ -326,6 +335,9 @@ namespace Egomotion.EgoXproject.Internal
 
             case SystemCapability.WirelessAccessoryConfiguration:
                 return new WirelessAccessoryConfigurationCapability();
+            
+            case SystemCapability.UserManagement:
+                return new UserManagementCapability();
 
             default:
                 throw new System.ArgumentOutOfRangeException();

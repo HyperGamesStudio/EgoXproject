@@ -1349,6 +1349,10 @@ namespace Egomotion.EgoXproject.UI
             case SystemCapability.WirelessAccessoryConfiguration:
                 DrawWirelessAccessoryConfigurationCapability(capability as WirelessAccessoryConfigurationCapability);
                 break;
+            
+            case SystemCapability.UserManagement:
+                DrawUserManagementCapability (capability as UserManagementCapability);
+                break;
 
             default:
                 throw new System.ArgumentOutOfRangeException();
@@ -1653,6 +1657,108 @@ namespace Egomotion.EgoXproject.UI
             EditorGUILayout.EndHorizontal ();
             GUILayout.Space (VERTICAL_SPACE);
             capability.GameControllers = enabled.ToArray ();
+        }
+        
+        void DrawUserManagementCapability (UserManagementCapability capability)
+        {
+            EditorGUI.BeginChangeCheck ();
+            EditorGUILayout.BeginHorizontal ();
+            EditorGUILayout.BeginVertical (GUILayout.Width (CAPABILITY_FIRST_COLUMN_WIDTH), GUILayout.ExpandWidth (false));
+            EditorGUILayout.LabelField ("User Management:", GUILayout.Width (CAPABILITY_FIRST_COLUMN_WIDTH), GUILayout.ExpandWidth (false));
+            EditorGUILayout.EndVertical ();
+            EditorGUILayout.BeginVertical ();
+            var enabled = new List<UserManagementCapability.UserManagementType> ();
+            var disabled = new List<UserManagementCapability.UserManagementType> ();
+
+            if (capability.UserManagement != null && capability.UserManagement.Length > 0)
+            {
+                foreach (var c in capability.UserManagement)
+                {
+                    enabled.Add (c);
+                }
+            }
+
+            var all = System.Enum.GetValues (typeof (UserManagementCapability.UserManagementType));
+
+            foreach (UserManagementCapability.UserManagementType c in all)
+            {
+                if (!enabled.Contains (c))
+                {
+                    disabled.Add (c);
+                }
+            }
+
+            var toRemove = UserManagementCapability.UserManagementType.RunsAsCurrentUser;
+            var toAdd = UserManagementCapability.UserManagementType.RunsAsCurrentUser;
+            var indexToMoveUp = -1;
+            bool removeRquired = false, addRequired = false;
+            var s = new Styling ();
+
+            for (int ii = 0; ii < enabled.Count; ++ii)
+            {
+                var c = enabled [ii];
+                EditorGUILayout.BeginHorizontal ();
+                bool selected = EditorGUILayout.ToggleLeft (c.ToString (), true, GUILayout.ExpandWidth (false), GUILayout.Width (200));
+
+                if (!selected)
+                {
+                    removeRquired = true;
+                    toRemove = c;
+                }
+
+                if (ii == 0)
+                {
+                    GUILayout.Space (20);
+                }
+                else if (s.SquareButton ("^", "Move up"))
+                {
+                    indexToMoveUp = ii;
+                }
+
+                EditorGUILayout.Space ();
+                EditorGUILayout.EndHorizontal ();
+            }
+
+            foreach (var c in disabled)
+            {
+                bool selected = EditorGUILayout.ToggleLeft (c.ToString (), false);
+
+                if (selected)
+                {
+                    addRequired = true;
+                    toAdd = c;
+                }
+            }
+
+            if (removeRquired)
+            {
+                enabled.Remove (toRemove);
+                disabled.Add (toRemove);
+                ChangeFile.IsDirty = true;
+            }
+
+            if (addRequired)
+            {
+                enabled.Add (toAdd);
+                disabled.Remove (toAdd);
+                ChangeFile.IsDirty = true;
+            }
+
+            if (indexToMoveUp > 0)
+            {
+                var c = enabled [indexToMoveUp];
+                enabled.RemoveAt (indexToMoveUp);
+                enabled.Insert (indexToMoveUp - 1, c);
+                ChangeFile.IsDirty = true;
+            }
+
+            GUILayout.Space (5);
+            //EditorGUILayout.LabelField ("With multiple controllers selected, use the arrow button to rearrange");
+            //EditorGUILayout.LabelField ("Note: Setting the controllers here will overwrite the Info.plist entry with these settings");
+            EditorGUILayout.EndVertical ();
+            EditorGUILayout.EndHorizontal ();
+            GUILayout.Space (VERTICAL_SPACE);
+            capability.UserManagement = enabled.ToArray ();
         }
 
         //Personal VPN

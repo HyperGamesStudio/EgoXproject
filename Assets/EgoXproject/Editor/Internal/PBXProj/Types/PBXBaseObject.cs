@@ -24,24 +24,24 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(uid))
             {
-                throw new System.ArgumentNullException(nameof (uid), "Dictionary cannot be null");
+                throw new System.ArgumentNullException( (uid).ToString(), "Dictionary cannot be null");
             }
 
             if (dict == null)
             {
-                throw new System.ArgumentNullException(nameof (dict), "Dictionary cannot be null");
+                throw new System.ArgumentNullException( (dict).ToString(), "Dictionary cannot be null");
             }
 
             var isaValue = dict.Element<PBXProjString>(isaKey);
 
             if (isaValue == null)
             {
-                throw new System.ArgumentException("Dictionary must contain an isa key with a string value", nameof (dict));
+                throw new System.ArgumentException("Dictionary must contain an isa key with a string value",  (dict).ToString());
             }
 
             if (isa.ToString() != isaValue.Value)
             {
-                throw new System.ArgumentException("Dictionary must be a " + isa + " dictionary and not a " + isaValue.Value + " dictionary", nameof (dict));
+                throw new System.ArgumentException("Dictionary must be a " + isa + " dictionary and not a " + isaValue.Value + " dictionary",  (dict).ToString());
             }
 
             Dict = dict;

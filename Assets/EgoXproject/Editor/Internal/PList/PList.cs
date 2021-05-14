@@ -37,7 +37,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (!Load(pathToPListFile))
             {
-                throw new ArgumentException("Failed to load PList: " + pathToPListFile, nameof (pathToPListFile));
+                throw new ArgumentException("Failed to load PList: " + pathToPListFile,  (pathToPListFile).ToString());
             }
         }
 
@@ -155,7 +155,7 @@ namespace Egomotion.EgoXproject.Internal
         XmlReaderSettings ReaderSettings()
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ProhibitDtd = false;
+            settings.DtdProcessing = DtdProcessing.Parse;
             settings.ValidationType = ValidationType.None;
             settings.XmlResolver = null;
             return settings;
@@ -261,7 +261,7 @@ namespace Egomotion.EgoXproject.Internal
             return true;
         }
 
-        public bool Save(string pathToSaveFile, bool overwrite = false)
+        public bool Save(string pathToSaveFile, bool overwrite = false) 
         {
             if (!IsValidPath(pathToSaveFile))
             {

@@ -337,6 +337,8 @@ namespace Egomotion.EgoXproject.Internal
                 return;
             }
 
+            Debug.Log("::" + pathToBuiltProject);
+            Debug.Log("::" + target);
             controller.ModifyXcodeProject(target, pathToBuiltProject);
         }
 

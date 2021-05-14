@@ -1616,7 +1616,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(path))
             {
-                throw new System.ArgumentNullException(nameof(path), "Path cannot be null or empty");
+                throw new System.ArgumentNullException((path).ToString(), "Path cannot be null or empty");
             }
 
             foreach (var existingPath in EntitlementsFilePaths)

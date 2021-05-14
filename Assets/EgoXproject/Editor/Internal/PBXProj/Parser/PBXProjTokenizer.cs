@@ -29,7 +29,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (source == null)
             {
-                throw new ArgumentNullException(nameof(source), "Must have a TextReader");
+                throw new ArgumentNullException((source).ToString(), "Must have a TextReader");
             }
 
             _source = source;

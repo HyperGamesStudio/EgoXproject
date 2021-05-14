@@ -70,17 +70,17 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(uid))
             {
-                throw new System.ArgumentNullException(nameof (uid), "uid cannot be null or empty");
+                throw new System.ArgumentNullException( (uid).ToString(), "uid cannot be null or empty");
             }
 
             if (string.IsNullOrEmpty(path))
             {
-                throw new System.ArgumentNullException(nameof (path), "path cannot be null or empty");
+                throw new System.ArgumentNullException( (path).ToString(), "path cannot be null or empty");
             }
 
             if (group == null)
             {
-                throw new System.ArgumentNullException(nameof (group), "group cannot be null");
+                throw new System.ArgumentNullException( (group).ToString(), "group cannot be null");
             }
         }
 

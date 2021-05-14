@@ -30,7 +30,7 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException(nameof(value), "Value must not be null or empty");
+                throw new ArgumentNullException((value).ToString(), "Value must not be null or empty");
             }
 
             _type = type;

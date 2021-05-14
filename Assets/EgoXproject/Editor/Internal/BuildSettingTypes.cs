@@ -32,17 +32,17 @@ namespace Egomotion.EgoXproject.Internal
         {
             if (string.IsNullOrEmpty(buildSettingName))
             {
-                throw new System.ArgumentNullException(nameof (buildSettingName), "Must have a name for the build setting");
+                throw new System.ArgumentNullException((buildSettingName), "Must have a name for the build setting");
             }
 
             if (string.IsNullOrEmpty(displayName))
             {
-                throw new System.ArgumentNullException(nameof (displayName), "Must have a name for the friendly name");
+                throw new System.ArgumentNullException( (displayName), "Must have a name for the friendly name");
             }
 
             if (string.IsNullOrEmpty(group))
             {
-                throw new System.ArgumentNullException(nameof (group), "Must have a group");
+                throw new System.ArgumentNullException( (group), "Must have a group");
             }
 
             BuildSettingName = buildSettingName;
