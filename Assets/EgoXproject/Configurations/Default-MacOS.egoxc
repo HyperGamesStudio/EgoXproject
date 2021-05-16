@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Type</key>
+    <string>EgoXproject Change File</string>
+    <key>Version</key>
+    <integer>2</integer>
+    <key>BuildPlatform</key>
+    <string>MacOS</string>
+    <key>InfoPlist</key>
+    <dict>
+      <key>CFBundleSignature</key>
+      <string>no.krillbite.mosiac</string>
+    </dict>
+    <key>ManualEntitlements</key>
+    <dict />
+    <key>Frameworks</key>
+    <dict>
+      <key>System</key>
+      <array />
+    </dict>
+    <key>FilesAndFolders</key>
+    <dict>
+      <key>Entries</key>
+      <array />
+    </dict>
+    <key>BuildSettings</key>
+    <array />
+    <key>Signing</key>
+    <dict />
+    <key>Scripts</key>
+    <array />
+    <key>Capabilities</key>
+    <dict>
+      <key>iCloud</key>
+      <dict>
+        <key>KeyValueStorage</key>
+        <true />
+        <key>iCloudDocuments</key>
+        <true />
+        <key>CloudKit</key>
+        <true />
+        <key>UseCustomContainers</key>
+        <true />
+        <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+        <string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
+        <key>CustomContainers</key>
+        <array>
+          <string>iCloud.no.krillbite.mosaic</string>
+        </array>
+      </dict>
+      <key>PushNotifications</key>
+      <dict />
+      <key>AppleArcade</key>
+      <dict />
+      <key>GameCenter</key>
+      <dict />
+      <key>GameControllers</key>
+      <dict>
+        <key>SupportedGameControllers</key>
+        <array>
+          <string>ExtendedGamepad</string>
+        </array>
+      </dict>
+    </dict>
+  </dict>
+</plist>
