@@ -4,7 +4,7 @@ Hyper Games fork of EgoXproject README
 ## Overview
 EgoXproject is an editor plugin for Unity. It automates Xcode project modification for iOS, tvOS and MacOS projects where Unity does not provide support.
 
-This code was forked from Egomotion/EgoXproject and has just been modified and added some new features, mainly MacOS support and some new config settings:
+This code was originally developed and later abandoned by Egomotion and has just been modified and added some new features, mainly MacOS support and some new config settings. Lincense and rights for the source still belongs to Egomotion and the original repo:
 https://github.com/Egomotion/EgoXproject
 
 ## Installation
