@@ -238,7 +238,13 @@ namespace Egomotion.EgoXproject.Internal
             if (enabled.Contains(new PListString("CFBundleDisplayName"))) {
                 plistChanges.Add("CFBundleDisplayName",changes.StringValue("CFBundleDisplayName"));
             }
-                
+
+            if (enabled.Contains(new PListString("EnableLanguages"))) {
+                PListArray langs = changes["EnableLanguages"] as PListArray;
+                if(langs!=null) plistChanges.Add("CFBundleLocalizations",langs);
+            }
+            
+            
             ApplyInfoPlistChanges(plistChanges, true);
                 
             return true;
@@ -658,7 +664,7 @@ namespace Egomotion.EgoXproject.Internal
             {
                 _pbxproj.AddSystemFramework("CloudKit.framework", LinkType.Required);
                 //ensure push is enabled with cloudkit
-                ApplyPushNotificationsCapability(new PushNotificationsCapability());
+                //ApplyPushNotificationsCapability(new PushNotificationsCapability());
             }
 
             //update entitlements file
@@ -772,7 +778,11 @@ namespace Egomotion.EgoXproject.Internal
             _pbxproj.EnableSystemCapability("com.apple.Push", true);
             //update entitlements file
             var entitlementChanges = new PListDictionary();
-            entitlementChanges.Add("aps-environment", "development");
+            if (_platform == BuildPlatform.MacOS) {
+                entitlementChanges.Add("com.apple.developer.aps-environmen", "development");
+            } else {
+                entitlementChanges.Add("aps-environment", "development");
+            }
             ApplyEntitlementsChanges(entitlementChanges, true);
         }
 

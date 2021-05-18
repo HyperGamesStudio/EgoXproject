@@ -9,10 +9,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Egomotion.EgoXproject.Internal;
 
+using System.IO;
+
 namespace Egomotion.EgoXproject
 {
     public static class XcodeEditor
     {
+        private static string _asmDefPath = null;
+        private static PListDictionary _languageList = null;
+        
         static bool PlatformFromTarget(BuildTarget target, out BuildPlatform platform)
         {
             switch (target)
@@ -40,6 +45,62 @@ namespace Egomotion.EgoXproject
             Debug.LogError("Invalid target specified. Only iOS and tvOS are supported");
         }
 
+
+        // Find base path- used to load resources from plugin
+        public static string BasePath(bool forceReload=false) {
+            if (!forceReload && !string.IsNullOrEmpty(_asmDefPath)) return _asmDefPath;
+            
+            string[] asmDefGuids = AssetDatabase.FindAssets("t:asmdef EgoXProject", null);
+            if (asmDefGuids == null || asmDefGuids.Length == 0) {
+                Debug.LogError("Could not find assembly definition file");
+                return null;
+            }
+            //Debug.Log("Found assembly With GUID: "+asmDefGuids[0]);
+            _asmDefPath = Path.GetDirectoryName(AssetDatabase.GUIDToAssetPath(asmDefGuids[0]));
+            //Debug.Log("Base path set to: " + _asmDefPath);
+            
+            return _asmDefPath;
+        }
+
+        [MenuItem("Test/Ego")]
+        internal static void Test() {
+            PList languages = LoadResourcePlist("Resources/Languages.plist");
+            
+            foreach (KeyValuePair<string, IPListElement> kvp in languages.Root) {
+                Debug.Log(kvp.Key + " : " + ((PListString) kvp.Value).Value);
+            }
+        }
+
+        internal static PListDictionary GetSupportedLanguages() {
+            if (_languageList != null) return _languageList;
+            PList plist = LoadResourcePlist("Resources/Languages.plist");
+            if (plist != null) _languageList = plist.Root;
+            return _languageList;
+        }
+        
+        internal static PList LoadResourcePlist(string path) {
+            
+            string loadPath = Path.Combine(BasePath(), path);
+            
+            //Debug.Log("Will load plist asset at path : " + loadPath);
+
+            PList plist = new PList();
+            string content = "";
+
+            using (StreamReader reader = new StreamReader(loadPath))
+            {
+                content = reader.ReadToEnd();
+            }
+            
+            if (!plist.LoadFromString(content))
+            {
+                Debug.LogError("Failed to load plist from file: "+loadPath);
+                return null;
+            }
+
+            return plist;
+        }
+        
         //Get or set whether egoXproject should run automatically. true = enabled.
         public static bool AutoRunEnabled
         {

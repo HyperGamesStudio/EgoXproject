@@ -18,19 +18,7 @@ using System.Collections.Generic;
 namespace Egomotion.EgoXproject.UI.Internal
 {
     internal class TextureResources {
-        
-        private string basePath {
-            get {
-                
-                string[] asmDefGuids = AssetDatabase.FindAssets("t:asmdef EgoXProject", null);
-                if (asmDefGuids == null || asmDefGuids.Length == 0) {
-                    Debug.LogError("Could not find assembly definition file");
-                    return "";
-                }
-
-                return Path.GetDirectoryName(AssetDatabase.GUIDToAssetPath(asmDefGuids[0]));                   
-            }
-        }
+     
         
         Dictionary<string, Texture2D> _resources = new Dictionary<string, Texture2D>();
 
@@ -150,7 +138,7 @@ namespace Egomotion.EgoXproject.UI.Internal
         }
 
         void LoadTexturesInResourceFile(string fileName) {
-            using (StreamReader reader = new StreamReader(basePath+"/Resources/"+fileName))
+            using (StreamReader reader = new StreamReader(XcodeEditor.BasePath()+"/Resources/"+fileName))
             {
                 while (!reader.EndOfStream)
                 {
@@ -193,9 +181,9 @@ namespace Egomotion.EgoXproject.UI.Internal
         
         Texture2D LoadTexture(string resourceName, int width, int height) {
             
-            Texture2D asset = AssetDatabase.LoadAssetAtPath<Texture2D>(basePath + "/Resources/" + resourceName+".png");
+            Texture2D asset = AssetDatabase.LoadAssetAtPath<Texture2D>(XcodeEditor.BasePath() + "/Resources/" + resourceName+".png");
             if (asset == null) {
-                Debug.LogError("Failed to load texture: "+basePath + "/Resources/" + resourceName+".png");
+                Debug.LogError("Failed to load texture: "+XcodeEditor.BasePath() + "/Resources/" + resourceName+".png");
                 return null;
             }
             return asset;

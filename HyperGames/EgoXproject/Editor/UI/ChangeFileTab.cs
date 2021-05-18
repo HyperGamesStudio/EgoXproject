@@ -276,13 +276,120 @@ namespace Egomotion.EgoXproject.UI
             }
 
             DrawAppConfigString("Display name", "CFBundleDisplayName");
-
+            
+            DrawLanugagueOptions();
            
 
             GUILayout.Space(VERTICAL_SPACE);
         }
+        
+        
 
         void DrawAppConfigString(string label, string id) {
+            
+            EditorGUILayout.BeginHorizontal(Style.Box());
+            
+            
+            
+            
+            var _plistString = new PListString(id);
+            
+            EditorGUI.BeginChangeCheck();
+            bool useConfig = EditorGUILayout.ToggleLeft(label, ChangeFile.AppConfigEnabled.Contains(_plistString), GUILayout.ExpandWidth(false));
+            
+            if (EditorGUI.EndChangeCheck()) {
+                if (useConfig && !ChangeFile.AppConfigEnabled.Contains(_plistString)) ChangeFile.AppConfigEnabled.Add(id);
+                else if (!useConfig && ChangeFile.AppConfigEnabled.Contains(_plistString)) ChangeFile.AppConfigEnabled.Remove(_plistString);
+                ChangeFile.IsDirty = true;
+            }
+
+            
+            
+            if(!useConfig)  GUI.enabled = false;
+            EditorGUI.BeginChangeCheck();
+            GUILayout.Space(7);
+            string field = EditorGUILayout.TextField("", ChangeFile.AppConfig.StringValue(id), GUILayout.ExpandWidth(true));
+
+            if (EditorGUI.EndChangeCheck()) {
+                if(ChangeFile.AppConfig.ContainsKey(id)) ChangeFile.AppConfig.Remove(id); 
+                if(useConfig) ChangeFile.AppConfig.Add(id,field);
+                ChangeFile.IsDirty = true;
+            }
+            
+            if(!useConfig)  GUI.enabled = true;
+            
+            
+            EditorGUILayout.EndHorizontal();
+        }
+
+        void DrawLanugagueOptions() {
+            EditorGUILayout.BeginHorizontal(Style.Box());
+            
+            
+            
+            string id = "EnableLanguages";
+            var _plistString = new PListString(id);
+            
+            EditorGUI.BeginChangeCheck();
+            bool useConfig = EditorGUILayout.ToggleLeft("Localized languages", ChangeFile.AppConfigEnabled.Contains(_plistString), GUILayout.ExpandWidth(true));
+            
+            if (EditorGUI.EndChangeCheck()) {
+                if (useConfig && !ChangeFile.AppConfigEnabled.Contains(_plistString)) ChangeFile.AppConfigEnabled.Add(id);
+                else if (!useConfig && ChangeFile.AppConfigEnabled.Contains(_plistString)) ChangeFile.AppConfigEnabled.Remove(_plistString);
+                ChangeFile.IsDirty = true;
+            }
+    
+            EditorGUILayout.EndHorizontal();
+            
+            
+            
+            
+
+            
+            if (useConfig) {
+
+                DrawLeft();
+                EditorGUILayout.BeginVertical(Style.Box());
+                EditorGUILayout.BeginHorizontal();
+
+
+                PListDictionary langs = XcodeEditor.GetSupportedLanguages();
+                if(!ChangeFile.AppConfig.ContainsKey(id)) ChangeFile.AppConfig.Add(id,new PListDictionary());
+
+                
+                
+                EditorGUIUtility.labelWidth = 250;
+                int i = 0;
+                foreach (var kvp in langs) {
+                    string readableName = ((PListString) kvp.Value).Value;
+                    string langCode = kvp.Key;
+                    EditorGUI.BeginChangeCheck();
+                    bool toggled = EditorGUILayout.ToggleLeft(readableName + " ("+langCode+")" , ChangeFile.LanguageEnabled(langCode), GUILayout.ExpandWidth(false), GUILayout.Width(250));
+                    if (EditorGUI.EndChangeCheck()) {
+                        ChangeFile.SetLanguageEnabled(langCode,toggled);
+                        ChangeFile.IsDirty = true;
+                    }
+                    if (i % 3 == 1) {
+                        EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                    }
+
+                    i++;
+                }
+                
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndVertical();
+                DrawRight();
+                
+            
+            }
+
+            
+         
+        }
+
+
+        void DrawLanugagueCheckBox(string label, string id) {
             
             EditorGUILayout.BeginHorizontal(Style.Box());
             EditorGUILayout.BeginVertical();
@@ -1470,6 +1577,8 @@ namespace Egomotion.EgoXproject.UI
             EditorGUILayout.EndVertical();
             EditorGUILayout.BeginVertical();
             capability.KeyValueStorage = EditorGUILayout.ToggleLeft("Key-value storage", capability.KeyValueStorage);
+            capability.UbiquityKvstoreIdentifier = EditorGUILayout.TextField("KVStore Identifier: ", capability.UbiquityKvstoreIdentifier);
+
 
             capability.iCloudDocuments = EditorGUILayout.ToggleLeft ("iCloud Documents", capability.iCloudDocuments);
 
@@ -1481,7 +1590,6 @@ namespace Egomotion.EgoXproject.UI
                 ChangeFile.Capabilities.EnableCapability(SystemCapability.PushNotifications, true);
             }
 
-            capability.UbiquityKvstoreIdentifier = EditorGUILayout.TextField("Ubiquity KVStore Identifier: ", capability.UbiquityKvstoreIdentifier);
             
             GUILayout.Space(5);
             EditorGUILayout.EndVertical();

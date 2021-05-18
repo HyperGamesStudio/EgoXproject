@@ -169,31 +169,7 @@ namespace Egomotion.EgoXproject.Internal
         }
 
         void LoadResourceBuildSettings() {
-
-            string[] asmDefGuids = AssetDatabase.FindAssets("t:asmdef EgoXProject", null);
-            if (asmDefGuids == null || asmDefGuids.Length == 0) {
-                Debug.LogError("Could not find assembly definition file");
-                return;
-            }
-
-            string basePath = Path.GetDirectoryName(AssetDatabase.GUIDToAssetPath(asmDefGuids[0]));
-            
- 
-            
-            
-
-            PList plist = new PList();
-            string content = "";
-
-            using (StreamReader reader = new StreamReader(Path.Combine(basePath,BUILD_SETTINGS_FILE)))
-            {
-                content = reader.ReadToEnd();
-            }
-            
-            if (!plist.LoadFromString(content))
-            {
-                return;
-            }
+            PList plist = XcodeEditor.LoadResourcePlist(BUILD_SETTINGS_FILE);
 
             //check is right type
             if (!ValidatePlist(plist))

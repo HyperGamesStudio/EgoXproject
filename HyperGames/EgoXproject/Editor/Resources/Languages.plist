@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ar</key>
+		<string>Arabic</string>
+		<key>ca</key>
+		<string>Catalan</string>
+		<key>zh-Hans</key>
+		<string>Chinese (Simplified)</string>
+		<key>zh-Hant</key>
+		<string>Chinese (Traditional)</string>
+		<key>zh-HK</key>
+		<string>Chinese (Hong Kong)</string>
+		<key>hr</key>
+		<string>Croatian</string>
+		<key>cs</key>
+		<string>Czech</string>
+		<key>da</key>
+		<string>Danish</string>
+		<key>nl</key>
+		<string>Dutch</string>
+		<key>en</key>
+		<string>English (U.S.)</string>
+		<key>en-GB</key>
+		<string>English (UK)</string>
+		<key>en-AU</key>
+		<string>English (Australian)</string>
+		<key>en-CA</key>
+		<string>English (Canadian)</string>
+		<key>en-IN</key>
+		<string>English (Indian)</string>
+		<key>fi</key>
+		<string>Finnish</string>
+		<key>fr</key>
+		<string>French</string>
+		<key>fr-CA</key>
+		<string>French (Canadian)</string>
+		<key>de</key>
+		<string>German</string>
+		<key>el</key>
+		<string>Greek</string>
+		<key>he</key>
+		<string>Hebrew</string>
+		<key>hi</key>
+		<string>Hindi</string>
+		<key>hu</key>
+		<string>Hungarian</string>
+		<key>id</key>
+		<string>Indonesian</string>
+		<key>it</key>
+		<string>Italian</string>
+		<key>ja</key>
+		<string>Japanese</string>
+		<key>ko</key>
+		<string>Korean</string>
+		<key>ms</key>
+		<string>Malay</string>
+		<key>nb</key>
+		<string>Norwegian (Bokmal)</string>
+		<key>nn</key>
+		<string>Norwegian (Nynorsk)</string>
+		<key>pl</key>
+		<string>Polish</string>
+		<key>pt</key>
+		<string>Portuguese</string>
+		<key>pt-BR</key>
+		<string>Portuguese (Brazil)</string>
+		<key>ro</key>
+		<string>Romanian</string>
+		<key>ru</key>
+		<string>Russian</string>
+		<key>sk</key>
+		<string>Slovak</string>
+		<key>es</key>
+		<string>Spanish</string>
+		<key>es-MX</key>
+		<string>Spanish (Mexico)</string>
+		<key>sv</key>
+		<string>Swedish</string>
+		<key>th</key>
+		<string>Thai</string>
+		<key>tr</key>
+		<string>Turkish</string>
+		<key>uk</key>
+		<string>Ukrainian</string>
+		<key>vi</key>
+		<string>Vietnamese</string>
+	</dict>
+</plist>

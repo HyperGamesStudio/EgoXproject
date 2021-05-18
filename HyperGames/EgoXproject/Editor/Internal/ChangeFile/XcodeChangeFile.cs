@@ -8,6 +8,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.iOS.Xcode;
+
 using UnityEngine;
 
 namespace Egomotion.EgoXproject.Internal
@@ -29,6 +31,7 @@ namespace Egomotion.EgoXproject.Internal
         const string MANUAL_ENTITLEMENTS = "ManualEntitlements";
         const string SIGNING_KEY = "Signing";
         const string CAPABILITIES_KEY = "Capabilities";
+        const string LANGUAGES_DICT_KEY = "EnableLanguages";
 
         const int VERSION = 2;
         readonly int[] _supportedVersions = { 1 };
@@ -58,6 +61,7 @@ namespace Egomotion.EgoXproject.Internal
         public SigningChanges Signing { get; private set; }
 
         public CapabilitiesChanges Capabilities { get; private set; }
+        
 
         public XcodeChangeFile()
         {
@@ -189,6 +193,8 @@ namespace Egomotion.EgoXproject.Internal
             LoadBuildSettings(p.Root.ArrayValue(BUILD_SETTINGS_KEY));
             LoadSigning(p.Root.DictionaryValue(SIGNING_KEY));
             LoadCapabilities(p.Root.DictionaryValue(CAPABILITIES_KEY));
+
+
             IsDirty = false;
             return true;
         }
@@ -414,5 +420,39 @@ namespace Egomotion.EgoXproject.Internal
                     Signing.HasChanges() ||
                     Capabilities.HasChanges());
         }
+        public bool LanguageEnabled(string key) {
+            if (AppConfig == null) {
+                Debug.LogError("No app config!");
+            }
+
+            if (!AppConfig.ContainsKey(LANGUAGES_DICT_KEY)) return false;
+            PListArray arr = AppConfig[LANGUAGES_DICT_KEY] as PListArray;
+            if (arr == null || arr.Count == 0) return false;
+
+            return arr.Contains(new PListString(key));
+ 
+        }
+        
+        public void SetLanguageEnabled(string key, bool enable=true) {
+            if (AppConfig == null) {
+                Debug.LogError("No app config!");
+            }
+            
+            PListArray arr = null;
+            if (AppConfig.ContainsKey(LANGUAGES_DICT_KEY)) {
+                arr = AppConfig[LANGUAGES_DICT_KEY] as PListArray;
+            }
+            
+            if(arr==null) arr = new PListArray();
+            PListString id = new PListString(key);
+            if (!enable && arr!=null && arr.Contains(id)) arr.Remove(id);
+            if (enable && !arr.Contains(id)) {
+                arr.Add(id);
+            }
+
+            AppConfig[LANGUAGES_DICT_KEY] = arr;
+        }
     }
+    
+    
 }
