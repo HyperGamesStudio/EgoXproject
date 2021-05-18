@@ -1,0 +1,8 @@
+{
+  "name": "no.hypergames.egox",
+  "version": "1.0.0",
+  "displayName": "EgoXProject",
+  "description": "A continuation of the abanoded project EgoXProject",
+  "unity": "2020.3",
+  "type": "library"
+}
