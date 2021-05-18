@@ -7,6 +7,9 @@ EgoXproject is an editor plugin for Unity. It automates Xcode project modificati
 This code was forked from Egomotion/EToXproject and has been modified and added new features:
 https://github.com/Egomotion/EgoXproject
 
+## Installation
+Go to Unity Package Manager and add package by Git URL: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject.git 
+
 ## Targeted Unity Versions
 This code was last tested and released using:
 * Unity 2020.3
