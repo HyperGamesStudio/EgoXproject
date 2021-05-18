@@ -1,4 +1,4 @@
-EgoXproject README
+Hyper Games fork of EgoXproject README
 ==================
 
 ## Overview
