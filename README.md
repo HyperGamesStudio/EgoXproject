@@ -8,7 +8,13 @@ This code was forked from Egomotion/EgoXproject and has just been modified and a
 https://github.com/Egomotion/EgoXproject
 
 ## Installation
+Install either by Git Package URL or as a Git Submodule:
+
+### Git Package
 Go to Unity Package Manager and add package by Git URL: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject.git 
+
+### Sub module
+Clone this repo as a submodule inside your /Packages folder in the Unity Project
 
 ## Targeted Unity Versions
 This code was last tested and released using:
