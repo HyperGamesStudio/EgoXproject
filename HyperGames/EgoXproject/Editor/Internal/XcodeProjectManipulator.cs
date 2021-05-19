@@ -38,6 +38,8 @@ namespace Egomotion.EgoXproject.Internal
             //make sure we have a full path and not a relative path
             projectPath = Path.GetFullPath(projectPath);
 
+
+            Debug.Log("Trying to find project in: " + projectPath);
             if (!LocatePBXProjFile(projectPath, out _pxbProjPath))
             {
                 Debug.LogError("EgoXproject: Path must be to a valid Xcode project");
@@ -136,6 +138,15 @@ namespace Egomotion.EgoXproject.Internal
 
         bool LocatePBXProjFile(string projectDir, out string pbxProjFilePath)
         {
+            if (projectDir.EndsWith(".xcodeproj")) {
+                string quickPath = Path.Combine(projectDir, "project.pbxproj");
+                if (File.Exists(quickPath)) {
+                    pbxProjFilePath = quickPath;
+                    return true;
+                }
+                
+            }
+            
             pbxProjFilePath = "";
 
             if (string.IsNullOrEmpty(projectDir))

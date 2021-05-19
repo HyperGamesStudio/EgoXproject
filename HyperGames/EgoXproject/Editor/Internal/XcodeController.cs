@@ -420,7 +420,7 @@ namespace Egomotion.EgoXproject.Internal
             }
         }
 
-        public void OverridePluginBundleIds(BuildTarget target, string pathToXcodeProject) {
+        public void PrepareBundlePlugins(BuildTarget target, string pathToXcodeProject) {
 
             if(target==BuildTarget.StandaloneOSX) {
 
@@ -485,7 +485,7 @@ namespace Egomotion.EgoXproject.Internal
                 platform = BuildPlatform.MacOS;
             }
 
-            OverridePluginBundleIds(target, pathToXcodeProject);
+            PrepareBundlePlugins(target, pathToXcodeProject);
 
             var changes = MergedChanges(platform);
 
