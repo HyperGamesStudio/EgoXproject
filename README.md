@@ -1,6 +1,7 @@
 Hyper Games fork of EgoXproject README
 ==================
 Latest version: 1.0.0, May 19 2021
+
 GitHub: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject
 
 ## Overview
@@ -18,8 +19,15 @@ Go to Unity Package Manager and add package by Git URL: https://github.com/Hyper
 ### Sub module
 Clone this repo as a submodule inside your /Packages folder in the Unity Project
 
+## Usage
+* Install package, and select Window > EgoXproject > MacOS/iOS/tvOS Xcode Editor
+* Create a profile and save it in your project
+* Modify your settings
+* Build xcode project like normal
+
 ## Targeted Unity Versions
 This code was last tested and released using:
+* Unity 2019.4
 * Unity 2020.3
 
 ## License
