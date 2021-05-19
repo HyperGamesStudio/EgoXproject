@@ -21,6 +21,7 @@ Clone this repo as a submodule inside your /Packages folder in the Unity Project
 
 ## Targeted Unity Versions
 This code was last tested and released using:
+* Unity 2019.4
 * Unity 2020.3
 
 ## License
