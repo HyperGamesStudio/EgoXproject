@@ -1585,10 +1585,11 @@ namespace Egomotion.EgoXproject.UI
             EditorGUI.BeginChangeCheck();
             capability.CloudKit = EditorGUILayout.ToggleLeft("CloudKit", capability.CloudKit);
 
+            /*
             if (EditorGUI.EndChangeCheck() && capability.CloudKit)
             {
                 ChangeFile.Capabilities.EnableCapability(SystemCapability.PushNotifications, true);
-            }
+            }*/
 
             
             GUILayout.Space(5);

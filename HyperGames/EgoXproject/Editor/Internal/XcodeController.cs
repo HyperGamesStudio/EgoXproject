@@ -9,8 +9,13 @@ using UnityEditor.Callbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.IO;
+
+using UnityEditor.iOS.Xcode;
+
+using Debug = UnityEngine.Debug;
 
 namespace Egomotion.EgoXproject.Internal
 {
@@ -379,6 +384,89 @@ namespace Egomotion.EgoXproject.Internal
             Debug.Log("::" + target);
             controller.ModifyXcodeProject(target, pathToBuiltProject);
         }
+        
+        private string ExecuteProcessTerminal(string argument)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo()
+                {
+                    FileName = "/bin/bash",
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    Arguments = " -c \"" + argument + " \""
+                };
+                Process myProcess = new Process
+                {
+                    StartInfo = startInfo
+                };
+                myProcess.Start();
+                string output = myProcess.StandardOutput.ReadToEnd();
+                string error = myProcess.StandardError.ReadToEnd();
+                Debug.Log("Bash command: " + argument);
+                if(!string.IsNullOrEmpty(error)) Debug.LogError(error);
+                if(!string.IsNullOrEmpty(output)) Debug.Log("Bash output: "+output);
+                myProcess.WaitForExit();
+
+                return output;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return null;
+            }
+        }
+
+        public void OverridePluginBundleIds(BuildTarget target, string pathToXcodeProject) {
+
+            if(target==BuildTarget.StandaloneOSX) {
+
+                // Loop through Xcode project to find all .bundle plugins:
+                foreach(string filePath in Directory.GetDirectories(pathToXcodeProject, "*.bundle", SearchOption.AllDirectories)) {
+                    // This should be the path to the main Info.plist file of the plugin
+                    string plistPath = filePath + "/Contents/Info.plist";
+                    
+                    // This bundle does not have a Info.plist file, that's strange - let's stop now to make sure we don't break anything
+                    if(!File.Exists(plistPath)) continue;
+
+                    // Multiple Info.plist files cause problems, and the Prime31 iCloud Mac plugin has these, so let's remove them
+                    string[] allInfoPlists = Directory.GetFiles(filePath, "Info.plist", SearchOption.AllDirectories);
+                    if (allInfoPlists.Length > 1) {
+                        for (int i = 0; i < allInfoPlists.Length; i++) {
+                            // Delete any Info.plist file that's not the main one
+                            if(allInfoPlists[i] != plistPath) File.Delete(allInfoPlists[i]);   
+                        }
+                    }
+                    
+                    // Delete all metafiles inside the bundle. Not necessary after Unity 2019, but let's check to be sure
+                    string[] allMetaFiles = Directory.GetFiles(filePath, "*.meta", SearchOption.AllDirectories);
+                    for (int i = 0; i < allMetaFiles.Length; i++) {
+                        File.Delete(allInfoPlists[i]);  
+                    }
+
+                    // Let's get ready to manipulate the Plist file
+                    PlistDocument pluginInfo = new PlistDocument();
+                    pluginInfo.ReadFromFile(plistPath);
+                    PlistElementDict pluginRoot = pluginInfo.root;
+                    
+                    // This is the filename of the plugin, minus extension:
+                    string bundleName = Path.GetFileName(filePath).Replace(".bundle", "");
+                    
+                    // Set the CFBundleIdentifier to be com.company.product.bundleName
+                    pluginRoot.SetString("CFBundleIdentifier",Application.identifier+"."+bundleName);
+
+                    // Save the Plist file
+                    pluginInfo.WriteToFile(plistPath);
+                    
+                    // Let's remove any codesigning from this plugin, so only the main app code sign is being used
+                    ExecuteProcessTerminal(string.Format("codesign --remove-signature {0}", filePath));
+
+                }
+            }
+        }
 
         public void ModifyXcodeProject(BuildTarget target, string pathToXcodeProject)
         {
@@ -396,6 +484,8 @@ namespace Egomotion.EgoXproject.Internal
             {
                 platform = BuildPlatform.MacOS;
             }
+
+            OverridePluginBundleIds(target, pathToXcodeProject);
 
             var changes = MergedChanges(platform);
 

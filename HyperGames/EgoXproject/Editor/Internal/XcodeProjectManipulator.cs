@@ -116,6 +116,8 @@ namespace Egomotion.EgoXproject.Internal
             {
                 return false;
             }
+            
+            
 
             return true;
         }
@@ -779,7 +781,7 @@ namespace Egomotion.EgoXproject.Internal
             //update entitlements file
             var entitlementChanges = new PListDictionary();
             if (_platform == BuildPlatform.MacOS) {
-                entitlementChanges.Add("com.apple.developer.aps-environmen", "development");
+                entitlementChanges.Add("com.apple.developer.aps-environment", "development");
             } else {
                 entitlementChanges.Add("aps-environment", "development");
             }
@@ -807,6 +809,10 @@ namespace Egomotion.EgoXproject.Internal
             var entitlementChanges = new PListDictionary();
             entitlementChanges.Add("com.apple.developer.arcade-operations", true);
             ApplyEntitlementsChanges(entitlementChanges, true);
+            
+            var plistChanges = new PListDictionary();
+            plistChanges.Add("NSApplicationRequiresArcade", true);
+            ApplyInfoPlistChanges(plistChanges);
 
         }
 
