@@ -2,7 +2,7 @@
   "name": "no.hypergames.egox",
   "version": "1.0.1",
   "displayName": "EgoXProject",
-  "description": "A continuation of the abanoded project EgoXProject originally developed my EgoMotion. GitHub link: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject",
+  "description": "A continuation of the abanoded project EgoXProject originally developed my EgoMotion. This package will help with automating changes to Xcode projects across iOS/tvOS and MacOS projects.",
   "unity": "2019.4",
   "type": "library",
     "author": {
