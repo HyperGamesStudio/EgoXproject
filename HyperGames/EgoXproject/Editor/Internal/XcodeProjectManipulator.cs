@@ -1297,9 +1297,7 @@ namespace Egomotion.EgoXproject.Internal
         bool ApplyEntitlementsChanges(PListDictionary changes, bool keepEmpty = false) {
             if (_pbxproj.EntitlementsFilePaths.Length <= 0) {
 
-                string path = _platform == BuildPlatform.MacOS
-                    ? Path.Combine(_pbxproj.PathToXcodeProject, Application.productName + ".entitlements")
-                    : Path.Combine(_pbxproj.PathToXcodeProject, _pbxproj.ProductName + ".entitlements");
+                string path = Path.Combine(_pbxproj.PathToXcodeProject, Application.productName + ".entitlements");
                 
                 _pbxproj.SetEntitlementsFile(path);
             }
