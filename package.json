@@ -1,8 +1,8 @@
 {
   "name": "no.hypergames.egox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "EgoXProject",
-  "description": "A continuation of the abanoded project EgoXProject. https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject. Found at GitHub: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject",
+  "description": "A continuation of the abanoded project EgoXProject originally developed my EgoMotion. GitHub link: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject",
   "unity": "2019.4",
   "type": "library",
     "author": {
