@@ -20,6 +20,7 @@ Go to Unity Package Manager and add package by Git URL: https://github.com/Hyper
 Clone this repo as a submodule inside your /Packages folder in the Unity Project
 
 ## Usage
+The assembly will only load in a Unity Editor running on a Mac, and with target platform set to either MacOS, iOS or tvOS
 * Install package, and select Window > EgoXproject > MacOS/iOS/tvOS Xcode Editor
 * Create a profile and save it in your project
 * Modify your settings
