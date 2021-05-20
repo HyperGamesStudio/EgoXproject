@@ -20,13 +20,14 @@ Install either by Git Package URL or as a Git Submodule:
 
 ### Git Package
 Go to Unity Package Manager and add package by Git URL: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject.git 
+Be aware that Unity does not support update management of Git packages, so you need to manually re-add the package URL to update the package.
 
 ![Step 1](https://hypergames.no/github/addpackage1.png)
 ![Step 2](https://hypergames.no/github/addpackage2.png)
 ![Step 3](https://hypergames.no/github/addpackage3.png)
 
 ### Sub module
-Clone this repo as a submodule inside your /Packages folder in the Unity Project
+You may also consider to clone this repo as a submodule inside your /Packages folder in the Unity Project. This way it's easier to see and get any updates to the package.
 
 ## Usage
 The assembly will only load in a Unity Editor running on a Mac, and with target platform set to either MacOS, iOS or tvOS
