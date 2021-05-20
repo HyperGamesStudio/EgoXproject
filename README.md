@@ -20,6 +20,7 @@ Install either by Git Package URL or as a Git Submodule:
 
 ### Git Package
 Go to Unity Package Manager and add package by Git URL: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject.git 
+
 Be aware that Unity does not support update management of Git packages, so you need to manually re-add the package URL to update the package.
 
 ![Step 1](https://hypergames.no/github/addpackage1.png)
