@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 
-using UnityEditor.iOS.Xcode;
+
 
 using Debug = UnityEngine.Debug;
 
@@ -447,20 +447,19 @@ namespace Egomotion.EgoXproject.Internal
                         File.Delete(allInfoPlists[i]);  
                     }
 
-                    // Let's get ready to manipulate the Plist file
-                    PlistDocument pluginInfo = new PlistDocument();
-                    pluginInfo.ReadFromFile(plistPath);
-                    PlistElementDict pluginRoot = pluginInfo.root;
+                    PList plist = XcodeEditor.LoadResourcePlist(plistPath);
                     
                     // This is the filename of the plugin, minus extension:
                     string bundleName = Path.GetFileName(filePath).Replace(".bundle", "");
                     
                     // Set the CFBundleIdentifier to be com.company.product.bundleName
-                    pluginRoot.SetString("CFBundleIdentifier",Application.identifier+"."+bundleName);
+                    if (!plist.Root.ContainsKey("CFBundleIdentifier"))
+                        plist.Root.Add("", Application.identifier + "." + bundleName);
+                    else plist.Root["CFBundleIdentifier"] = new PListString(Application.identifier + "." + bundleName);
 
                     // Save the Plist file
-                    pluginInfo.WriteToFile(plistPath);
-                    
+                    plist.Save(plistPath, true);
+
                     // Let's remove any codesigning from this plugin, so only the main app code sign is being used
                     ExecuteProcessTerminal(string.Format("codesign --remove-signature {0}", filePath));
 

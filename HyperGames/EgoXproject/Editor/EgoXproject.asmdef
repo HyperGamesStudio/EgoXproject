@@ -11,8 +11,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_TVOS",
-        "UNITY_EDITOR_OSX"
+        "UNITY_EDITOR"
     ],
     "versionDefines": [],
     "noEngineReferences": false
