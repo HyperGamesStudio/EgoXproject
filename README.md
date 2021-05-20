@@ -1,6 +1,6 @@
 Hyper Games fork of EgoXproject README
 ==================
-Latest version: 1.0.0, May 19 2021
+Latest version: 1.0.1, May 20 2021
 
 GitHub: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject
 
