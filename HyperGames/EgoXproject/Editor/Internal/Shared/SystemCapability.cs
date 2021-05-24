@@ -53,6 +53,7 @@ namespace Egomotion.EgoXproject.Internal
             {
                 return new SystemCapability []
                 {
+                    SystemCapability.AppleArcade,
                     SystemCapability.iCloud,
                     SystemCapability.PushNotifications,
                     SystemCapability.GameCenter,
@@ -86,6 +87,7 @@ namespace Egomotion.EgoXproject.Internal
             {
                 return new SystemCapability []
                 {
+                    SystemCapability.AppleArcade,
                     SystemCapability.iCloud,
                     SystemCapability.PushNotifications,
                     SystemCapability.GameCenter,
