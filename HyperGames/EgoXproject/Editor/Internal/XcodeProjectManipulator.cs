@@ -809,11 +809,13 @@ namespace Egomotion.EgoXproject.Internal
             var changes = new PListDictionary();
             changes.Add("UIRequiredDeviceCapabilities", new PListArray("gamekit"));
             ApplyInfoPlistChanges(changes);
-            
-            var entitlementChanges = new PListDictionary();
-            entitlementChanges.Add("com.apple.developer.game-center", true);
-            ApplyEntitlementsChanges(entitlementChanges, true);
-            
+
+            if (_platform == BuildPlatform.MacOS) {
+                var entitlementChanges = new PListDictionary();
+                entitlementChanges.Add("com.apple.developer.game-center", true);
+                ApplyEntitlementsChanges(entitlementChanges, true);
+            }
+
         }
         
         void ApplyAppleArcadeCapability(AppleArcadeCapability capability)
