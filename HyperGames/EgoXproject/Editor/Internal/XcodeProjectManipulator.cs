@@ -730,6 +730,11 @@ namespace Egomotion.EgoXproject.Internal
             if (services.Count > 0)
             {
                 entitlementChanges.Add("com.apple.developer.icloud-services", services);
+
+                if (_platform == BuildPlatform.tvOS) {
+                    entitlementChanges.Add("aps-environment", "production");
+                }
+                
             }
 
             if (ubiquityContainerIds.Count > 0)
@@ -792,9 +797,9 @@ namespace Egomotion.EgoXproject.Internal
             //update entitlements file
             var entitlementChanges = new PListDictionary();
             if (_platform == BuildPlatform.MacOS) {
-                entitlementChanges.Add("com.apple.developer.aps-environment", "development");
+                entitlementChanges.Add("com.apple.developer.aps-environment", "production");
             } else {
-                entitlementChanges.Add("aps-environment", "development");
+                entitlementChanges.Add("aps-environment", "production");
             }
             ApplyEntitlementsChanges(entitlementChanges, true);
         }
