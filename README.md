@@ -1,6 +1,6 @@
 Hyper Games fork of EgoXproject README
 ==================
-Current version: 1.0.2, May 20 2021
+Current version: 1.0.3, May 20 2021
 
 GitHub: https://github.com/HyperGamesStudio/Packages-no.hypergames.egoxproject
 
@@ -40,6 +40,9 @@ You may also consider to clone this repo as a submodule inside your /Packages fo
 This code was last tested and released using:
 * Unity 2019.4
 * Unity 2020.3
+
+## Known issues
+The plugin needs an option to switch between development/production APS environment
 
 ## License
 * EgoXproject is licensed under LGPL v3. If this causes you issues, please get in touch for an alternative licence.
