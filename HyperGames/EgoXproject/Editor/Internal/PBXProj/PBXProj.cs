@@ -583,7 +583,7 @@ namespace Egomotion.EgoXproject.Internal
             foreach (var buildConfig in MainTarget.BuildConfigurationList.BuildConfigurations)
             {
                 //TODO something better than this
-                var str = buildConfig.StringForKey("INFOPLIST_FILE");
+                var str = buildConfig.StringForKey("INFOPLIST_FILE").Replace("\"","");
 
                 if (!string.IsNullOrEmpty(str))
                 {
