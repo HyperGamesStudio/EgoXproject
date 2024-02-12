@@ -815,11 +815,9 @@ namespace Egomotion.EgoXproject.Internal
             changes.Add("UIRequiredDeviceCapabilities", new PListArray("gamekit"));
             ApplyInfoPlistChanges(changes);
 
-            if (_platform == BuildPlatform.MacOS) {
-                var entitlementChanges = new PListDictionary();
-                entitlementChanges.Add("com.apple.developer.game-center", true);
-                ApplyEntitlementsChanges(entitlementChanges, true);
-            }
+            var entitlementChanges = new PListDictionary();
+            entitlementChanges.Add("com.apple.developer.game-center", true);
+            ApplyEntitlementsChanges(entitlementChanges, true);
 
         }
         
