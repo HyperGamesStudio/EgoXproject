@@ -1,6 +1,6 @@
 {
   "name": "no.hypergames.egox",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "EgoXProject",
   "description": "A continuation of the abandoned project EgoXProject originally developed my EgoMotion. This package will help with automating changes to Xcode projects across iOS/tvOS and MacOS projects.",
   "unity": "2019.4",
